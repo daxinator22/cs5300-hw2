@@ -28,12 +28,10 @@ public class Infix {
 
     static int lookahead;
     static String string;
-    static String test_result;
 
     public Infix(String terminals) throws Exception{
         lookahead = 0;
         string = terminals;
-        test_result = "";
         list();
 
         //If the parser gets to this point and the lookahead is not at the end of the string,
@@ -49,23 +47,17 @@ public class Infix {
         if (string.charAt(lookahead) == '+') {
             match(lookahead);
             System.out.print('(');
-            test_result += '(';
             list();
             System.out.print('+');
-            test_result += '+';
             list();
             System.out.print(')');
-            test_result += ')';
         } else if (string.charAt(lookahead) == '-') {
             match(lookahead);
             System.out.print('(');
-            test_result += '(';
             list();
             System.out.print('-');
-            test_result += '-';
             list();
             System.out.print(')');
-            test_result += ')';
         } else {
             digit();
         }
@@ -77,7 +69,6 @@ public class Infix {
     private void digit() throws Exception{
         if(Character.isDigit(string.charAt(lookahead))){
             System.out.print(string.charAt(lookahead));
-            test_result += string.charAt(lookahead);
             match(lookahead);
         }
         else{
@@ -91,7 +82,7 @@ public class Infix {
             lookahead++;
         }
         else{
-            throw new Exception();
+            throw new Exception("Syntax Error on match()");
         }
     }
 
