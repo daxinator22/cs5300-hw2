@@ -4,8 +4,8 @@ import java.io.IOException;
 public class Infix {
 
     public static void main(String[] args) {
-        //String str = "+++12-835"; // (((1+2)+(8-3))+5)
-        String str = "+7";
+        String str = "+++12-835"; // (((1+2)+(8-3))+5)
+        //String str = "";
         if (args.length > 0) {
             str = args[0];
         }
@@ -34,8 +34,12 @@ public class Infix {
         lookahead = 0;
         string = terminals;
         test_result = "";
-        while(lookahead < string.length()){
-            list();
+        list();
+
+        //If the parser gets to this point and the lookahead is not at the end of the string,
+        //then there is an error because there is no production rule that starts with list.
+        if(lookahead < string.length() - 1){
+            throw new Exception("Syntax Error on Infix()");
         }
     }
 
